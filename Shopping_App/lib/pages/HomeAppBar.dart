@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shop/pages/Loginweb.dart';
+
+import '../Animations.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -7,40 +10,39 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.all(25),
+      padding: const EdgeInsets.all(25),
       child: Row(
         children: [
-          Icon(
-            Icons.sort,
-            size: 30,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(context, FadeRoute(page: LoginWeb()));
+            },
+            child: const Icon(
+              Icons.sort,
+              size: 30,
+            ),
           ),
-          Padding(
-              padding: EdgeInsets.only(left: 125),
+          const Padding(
+            padding: EdgeInsets.only(left: 125),
             child: Text(
               "Audio",
-              style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.bold
-              ),
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Badge(
             backgroundColor: Colors.red,
-            padding: EdgeInsets.all(7),
+            padding: const EdgeInsets.all(7),
             child: InkWell(
               onTap: () {},
-              child: Icon(
+              child: const Icon(
                 Icons.shopping_bag_outlined,
                 size: 30,
-
               ),
             ),
-
           ),
-
         ],
-      ) ,
+      ),
     );
   }
 }
