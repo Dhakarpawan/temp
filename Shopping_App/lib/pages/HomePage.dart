@@ -90,8 +90,7 @@ class HomePage extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(35),
                             image: const DecorationImage(
-                              image: NetworkImage(
-                                  'https://www.marshallheadphones.com/dw/image/v2/BCQL_PRD/on/demandware.static/-/Sites-zs-master-catalog/default/dw1394819b/images/marshall/headphones/monitor-ii-anc/large/mh-monitor-II-ANC-large-1.png'),
+                              image: AssetImage("lib/assets/Headphones.png"),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -106,8 +105,7 @@ class HomePage extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(35),
                             image: const DecorationImage(
-                              image: NetworkImage(
-                                  'https://m.media-amazon.com/images/I/71fAjuDqbdL.jpg'),
+                              image: AssetImage("lib/assets/Marshall.jpeg"),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -122,8 +120,7 @@ class HomePage extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(35),
                             image: const DecorationImage(
-                              image: NetworkImage(
-                                  'https://proaudiovideo.in/wp-content/uploads/2022/06/Marshall-Minor-III-True-Wireless-In-Ear-Headphones-Online-Buy-Mumbai-India_1.jpg'),
+                              image: AssetImage("lib/assets/Earbuds.jpeg"),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -135,9 +132,10 @@ class HomePage extends StatelessWidget {
                           height: 150,
                           width: 150,
                           decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(35),
-                          ),
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(35),
+                              image: const DecorationImage(
+                                  image: AssetImage("lib/assets/mouse.jpg"))),
                         ),
                       ),
                     ],
