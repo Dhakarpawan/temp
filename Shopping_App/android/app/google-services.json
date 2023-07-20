@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "241419087819",
+    "project_id": "shopping-end",
+    "storage_bucket": "shopping-end.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241419087819:android:89d6f314b17a799064104e",
+        "android_client_info": {
+          "package_name": "com.example.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241419087819-adjup41l1a8aar1j0mmkv18ucj8vci1r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ0fSlRbTXzZICW3Zl1DueLWQCyouZAP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241419087819-adjup41l1a8aar1j0mmkv18ucj8vci1r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
