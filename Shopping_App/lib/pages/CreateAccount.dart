@@ -1,26 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shop/pages/CreateAccount.dart';
-import 'package:shop/pages/HomePage.dart';
+import 'package:shop/pages/Loginweb.dart';
+import 'package:shop/pages/Successful.dart';
 import 'package:shop/utils.dart';
 
 import '../Animations.dart';
 
-class LoginWeb extends StatefulWidget {
-  const LoginWeb({super.key});
+class CreateAccount extends StatefulWidget {
+  const CreateAccount({super.key});
 
   @override
-  State<LoginWeb> createState() => _LoginWebState();
+  State<CreateAccount> createState() => _CreateAccountState();
 }
 
-class _LoginWebState extends State<LoginWeb> {
+class _CreateAccountState extends State<CreateAccount> {
   final userController = TextEditingController();
   final passwordController = TextEditingController();
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   bool _showErrorUsername = false;
   bool _showErrorPassword = false;
-  final _auth = FirebaseAuth.instance;
   bool loading = false;
 
   @override
@@ -28,27 +29,6 @@ class _LoginWebState extends State<LoginWeb> {
     super.dispose();
     userController.dispose();
     passwordController.dispose();
-  }
-
-  void login() {
-    setState(() {
-      loading = true;
-    });
-    _auth
-        .signInWithEmailAndPassword(
-            email: userController.text.trim(),
-            password: passwordController.text.trim())
-        .then((value) {
-      Navigator.pushReplacement(context, FadeRoute(page: HomePage()));
-      setState(() {
-        loading = false;
-      });
-    }).onError((error, stackTrace) {
-      setState(() {
-        loading = false;
-      });
-      Utils().toastMessage();
-    });
   }
 
   bool _validateUsername() {
@@ -79,16 +59,19 @@ class _LoginWebState extends State<LoginWeb> {
                 SizedBox(
                   height: screenSize.height / 3,
                   width: screenSize.width,
-                  child: SvgPicture.asset(
-                      "lib/assets/Ecommerce web page-pana.svg"),
+                  child:
+                      SvgPicture.asset("lib/assets/Authentication-rafiki.svg"),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      const SizedBox(
+                        height: 30,
+                      ),
                       Text(
-                        "Login",
+                        "Create Account",
                         style: TextStyle(
                           color: Colors.grey.shade800,
                           fontWeight: FontWeight.bold,
@@ -128,7 +111,7 @@ class _LoginWebState extends State<LoginWeb> {
                                       ? Colors.red
                                       : Colors.blue,
                                   border: InputBorder.none,
-                                  hintText: "Username",
+                                  hintText: "Email address",
                                   hintStyle:
                                       const TextStyle(color: Colors.grey),
                                 ),
@@ -156,22 +139,39 @@ class _LoginWebState extends State<LoginWeb> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      ),
-                      const SizedBox(
                         height: 30,
                       ),
                       GestureDetector(
                         onTap: () {
                           if (_validateUsername() && _validatePassword()) {
-                            login();
+                            setState(() {
+                              loading = true;
+                            });
+
+                            _auth
+                                .createUserWithEmailAndPassword(
+                                    email:
+                                        userController.text.toString().trim(),
+                                    password: passwordController.text
+                                        .toString()
+                                        .trim())
+                                .then((value) {
+                              // User created successfully, navigate to the Successful page
+                              setState(() {
+                                loading = false;
+                              });
+                              Navigator.pushReplacement(
+                                  context, FadeRoute(page: const Successful()));
+                            }).catchError((error) {
+                              // Handle the error here (login failed)
+                              setState(() {
+                                loading = false;
+                              });
+                              Utils()
+                                  .toastMessage(); // Show the error message using a toast or any other method
+                            });
                           } else {
+                            // Handle validation errors here
                             if (!_validateUsername()) {
                               setState(() {
                                 _showErrorUsername = true;
@@ -187,58 +187,30 @@ class _LoginWebState extends State<LoginWeb> {
                         },
                         child: Container(
                           height: 50,
-                          width: screenSize.width * 0.7,
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             color: Colors.black,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              if (loading) // Show CircularProgressIndicator only when loading is true
-                                const Positioned.fill(
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              const Center(
-                                child: Text(
-                                  "Login",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 18),
-                                ),
-                              ),
-                            ],
+                          child: const Center(
+                            child: Text(
+                              "Create Account",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       ),
-
-                      // // For now this is not needed
-                      // if (_showErrorMessage)
-                      //   const Padding(
-                      //     padding: EdgeInsets.symmetric(
-                      //       vertical: 15,
-                      //     ),
-                      //     child: Text(
-                      //       'Please enter both username and password.',
-                      //       style: TextStyle(color: Colors.red),
-                      //     ),
-                      //   ),
-
                       const SizedBox(
                         height: 30,
                       ),
                       GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
-                              context, FadeRoute(page: const CreateAccount()));
+                              context, FadeRoute(page: const LoginWeb()));
                         },
                         child: const Center(
                           child: Text(
-                            "Create Account",
+                            "Have an account? Login ",
                             style: TextStyle(
                                 color: Color.fromRGBO(49, 39, 79, .6),
                                 fontSize: 18),
