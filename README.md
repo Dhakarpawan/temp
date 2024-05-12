@@ -14,7 +14,7 @@ git config --global user.email "your-email"</code></pre>
   <pre><code>git clone https://github.com/your-username/ACA_2024_Flutter-Fusion.git</code></pre>
 3. Navigate to the repository directory : <code>cd Intro-to-ML-and-DL</code>
 4. Set up a remote connection to the original repository
-   <code>git remote add upstream https://github.com/Intro-to-ML-and-DL/Intro-to-ML-and-DL.git</code>
+   <code>git remote add upstream  </https://github.com/SAVG10/ACA_2024_Flutter-Fusion
 5. Verify that the remote connection : <code>git remote -v</code>. You would see two remote connections: origin (pointing to your forked repository) and upstream (pointing to the original repository).
 
 ### Uploading Files
